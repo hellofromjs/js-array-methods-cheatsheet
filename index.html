@@ -13,10 +13,6 @@
 			padding: 10px;
 		}
 
-		pre:first-line {
-			line-height: 0;
-		}
-
 		.docs {
 			font-weight: bold;
 		}
@@ -352,6 +348,10 @@ numbers.fill(123, 1, 3)
 </code></pre>
 
 
+	<script>
+		const code = document.querySelectorAll("pre code");
+		[...code].forEach(el => el.textContent = el.textContent.replace(/^\n/, ''));
+	</script>
 	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
 	<script>hljs.highlightAll();</script>
