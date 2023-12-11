@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS Array Methods</title>
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/stackoverflow-light.min.css">
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 10px;
+		}
+
+		pre:first-line {
+			line-height: 0;
+		}
+
+		.docs {
+			font-weight: bold;
+		}
+
+		a {
+			color: blue;
+		}
+
+		.center {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1 class="center">Most Useful Array Methods</h1>
+
+	<div class="docs">Data:</div>
+	<pre><code class="language-js">
+const people = [
+	{ name: "Sam", age: 30 },
+	{ name: "Jane", age: 27 },
+	{ name: "John", age: 32 },
+	{ name: "Bill", age: 27 },
+	{ name: "Andrew", age: 54 },
+]
+
+const arrays = [
+	[1, 2], [3, 4], [[56], [78]]
+]
+
+const numbers = [1, 2, 3, 4]
+const numbers2 = [5, 6, 7, 8]
+
+const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+			target="_blank">map()</a>
+	</div>
+	<pre><code class="language-js">
+// create a new array of same length by going over all array elements, doing some action on them and returning result for each one
+
+const new_array = numbers.map(element => element * 2)
+// output: [ 2, 4, 6, 8 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+			target="_blank">filter()</a>
+	</div>
+	<pre><code class="language-js">
+// create a new array with only elements that passed provided filter
+
+const new_array = numbers.filter(element => element > 2)
+// output: [ 3, 4 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"
+			target="_blank">reduce()</a>
+	</div>
+	<pre><code class="language-js">
+// takes array of elements and reduce them to one value.
+// First parameter is function that takes previously returned value and current value.
+// Returned value is used in the next iteration
+
+const result = people.reduce((groupedPeople, person) => {
+	const age = person.age
+
+	if (groupedPeople[age] == null) groupedPeople[age] = []
+
+	groupedPeople[age].push(person)
+
+	return groupedPeople
+}, {})
+
+/* output: {
+	'27': [ { name: 'Jane', age: 27 }, { name: 'Bill', age: 27 } ],
+	'30': [ { name: 'Sam', age: 30 } ],
+	'32': [ { name: 'John', age: 32 } ],
+	'54': [ { name: 'Andrew', age: 54 } ]
+}*/
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push"
+			target="_blank">push()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop"
+			target="_blank">pop()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift"
+			target="_blank">unshift()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift"
+			target="_blank">shift()</a>
+	</div>
+	<pre><code class="language-js">
+people.push(123)	// add element at the end of array
+people.pop()		// remove element from the end of array
+people.unshift(123)	// add element at the start of array
+people.shift()		// remove element from the start of array
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join"
+			target="_blank">join()</a>
+	</div>
+	<pre><code class="language-js">
+// returns a new string by concatenating all of the elements in this array, separated by a specified separator string
+
+const result = numbers.join('-')
+// output: '1-2-3-4'
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split"
+			target="_blank">split()</a>
+	</div>
+	<pre><code class="language-js">
+// divides string into a list of substrings by searching for the pattern and puts these substrings into an array
+
+const str = '1-2-3-4'
+const new_array = str.split('-')
+// output: [ '1', '2', '3', '4' ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf"
+			target="_blank">indexOf()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf"
+			target="_blank">lastIndexOf()</a>
+	</div>
+	<pre><code class="language-js">
+// returns first index at which you can find provided value
+
+const index = beasts.indexOf('bison')
+// output: 1
+
+// same as .indexOf(), but searches from the back
+
+const index = beasts.lastIndexOf('bison')
+// output: 4
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
+			target="_blank">find()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast"
+			target="_blank">findLast()</a>
+	</div>
+	<pre><code class="language-js">
+// find first value in array that meets the requirement
+
+const result = numbers.find(n => n < 2)
+// output: 1
+
+// find last value in the array that meets the requirement (same as .find(), but starts check from the back)
+
+const result = numbers.findLast(n => n < 2)
+// output: 1
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"
+			target="_blank">slice()</a>
+	</div>
+	<pre><code class="language-js">
+// return a (shallow) copy of an array between provided start and end indexes
+
+const new_array = numbers.slice(2, 4)
+// output: [ 3, 4 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"
+			target="_blank">splice()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced"
+			target="_blank">toSpliced()</a>
+	</div>
+	<pre><code class="language-js">
+// removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements
+// parameters are (startIndex, deleteCount, items...)
+
+numbers.splice(1, 0, 5)
+// output: [ 1, 5, 2, 3, 4 ]
+
+// same as .splice(), but doesn't modify original array
+
+const new_array = numbers.toSpliced(1, 0, 5)
+// output: [ 1, 5, 2, 3, 4 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+			target="_blank">sort()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+			target="_blank">toSorted()</a>
+	</div>
+	<pre><code class="language-js">
+// sort array elements based on condition
+
+numbers.sort((a, b) => b - a)
+// output: [ 4, 3, 2, 1 ]
+
+// same as .sort(), but doesn't modify original array
+
+const new_array = people.toSorted((a, b) => b - a)
+// output: [ 4, 3, 2, 1 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"
+			target="_blank">includes()</a>
+	</div>
+	<pre><code class="language-js">
+// return 'true' if the array has provided value, 'false' otherwise
+
+const result = numbers.includes(4)
+// output: true
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse"
+			target="_blank">reverse()</a>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toReversed"
+			target="_blank">toReversed()</a>
+	</div>
+	<pre><code class="language-js">
+// reverse array elements
+
+numbers.reverse()
+// output: [ 4, 3, 2, 1 ]
+
+// same as .reverse(), but doesn't modify original array
+
+const new_array = numbers.toReversed()
+// output: [ 4, 3, 2, 1 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+			target="_blank">flat()</a>
+	</div>
+	<pre><code class="language-js">
+// takes nested arrays of arrays and flaten them into array with just those elements. Can provide how many levels to flaten
+
+const new_array = arrays.flat(Number.POSITIVE_INFINITY)
+// output: [ 1, 2, 3, 4, 56, 78 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat"
+			target="_blank">concat()</a>
+	</div>
+	<pre><code class="language-js">
+// return new array by combining two arrays
+
+const new_array = numbers.concat(numbers2)
+// output: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every"
+			target="_blank">every()</a>
+	</div>
+	<pre><code class="language-js">
+// returns 'true' if EVERY element in the array passed the condition, 'false' otherwise
+
+const result = numbers.every(element => element < 40) 
+// output: true
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some"
+			target="_blank">some()</a>
+	</div>
+	<pre><code class="language-js">
+// return 'true' if AT LEAST ONE element in the array passed the condition, 'false' otherwise
+
+const result = numbers.some(element => element < 40)
+// output: true
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy"
+			target="_blank">Object.groupBy()</a>
+	</div>
+	<pre><code class="language-js">
+// group array of objects based on a condition. (Can use Object or Map)
+// this example groups objects based on first letter of the name
+
+const new_object = Object.groupBy(people, person => person.name[0])
+/* output: {
+	S: [ {name: "Sam", age: 30} ],
+	J: [ {name: "Jane", age: 27}, {name: "John", age: 32} ],
+	B: [ {name: "Bill", age: 27} ],
+	A: [ {name: "Andrew", age: 54} ],
+}*/
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/with"
+			target="_blank">with()</a>
+	</div>
+	<pre><code class="language-js">
+// replaces value at specified index and return new array withou modifying original array
+
+const new_array = people.with(1, 123)
+// output: [ 1, 123, 3, 4 ]
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at"
+			target="_blank">at()</a>
+	</div>
+	<pre><code class="language-js">
+// same as getting value from array with index [1], but allows to use negative numbers to get value from the end of array
+
+const result = people.at(-1)
+// output: 4
+</code></pre>
+
+	<div class="docs">Docs: <a
+			href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill"
+			target="_blank">fill()</a>
+	</div>
+	<pre><code class="language-js">
+// overwrite array elements between indexes 1 and 3 (not including) to value 123
+
+numbers.fill(123, 1, 3)
+// output: [ 1, 123, 123, 4 ]
+</code></pre>
+
+
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/javascript.min.js"></script>
+	<script>hljs.highlightAll();</script>
+</body>
+
+</html>
